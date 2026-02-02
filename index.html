@@ -84,24 +84,38 @@ setInterval(() => {
 }, 400);
 
 function celebrate() {
-  document.getElementById("bgMusic").play();
+  const music = document.getElementById("bgMusic");
 
+  // Play music (iPhone-safe)
+  music.currentTime = 0;
+  music.play().then(() => {
+    music.loop = true;
+  }).catch(err => {
+    alert("Tap again to play music 🎵");
+  });
+
+  // Change content
   document.getElementById("content").innerHTML = `
-    <div class="heart">💖</div>
+    <div style="font-size:80px; animation: beat 1.2s infinite;">💖</div>
     <h1>🎉 I LOVE YOU AKANKSHA 🎉</h1>
     <h2>You are my Valentine 🌹</h2>
     <h3>— Forever Yours, Uday ❤️</h3>
   `;
 
-  for (let i = 0; i < 40; i++) {
+  // Confetti
+  for (let i = 0; i < 30; i++) {
     let c = document.createElement("div");
-    c.className = "confetti";
-    c.innerHTML = ["🎉","❤️","💖","🥰","✨"][Math.floor(Math.random()*5)];
+    c.style.position = "absolute";
     c.style.left = Math.random() * 100 + "vw";
-    c.style.animationDuration = (Math.random() * 2 + 2) + "s";
+    c.style.top = "-50px";
+    c.style.fontSize = "28px";
+    c.innerHTML = ["🎉","❤️","💖","🥰","✨"][Math.floor(Math.random()*5)];
+    c.style.animation = "fall 3s linear";
     document.body.appendChild(c);
     setTimeout(() => c.remove(), 3000);
   }
+}
+</script>
 
   setTimeout(() => {
     let msg = encodeURIComponent(
