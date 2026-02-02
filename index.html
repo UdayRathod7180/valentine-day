@@ -12,21 +12,19 @@ body {
     linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
     url("akanksha.jpg") center/cover no-repeat;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: flex-start;
   font-family: Arial, sans-serif;
   color: white;
-  text-align: left;
-  overflow: hidden;
 }
 
 .container {
-  max-width: 500px;
-  padding-left: 40px;
+  padding-left: 30px;
+  max-width: 400px;
 }
 
 .heart {
-  font-size: 60px;
+  font-size: 70px;
   animation: beat 1.2s infinite;
 }
 
@@ -39,7 +37,7 @@ body {
 }
 
 button {
-  padding: 14px 36px;
+  padding: 14px 34px;
   font-size: 20px;
   border: none;
   border-radius: 30px;
@@ -53,7 +51,8 @@ button {
 
 <body>
 
-<audio id="bgMusic" preload="auto" playsinline>
+<!-- 🎵 Music -->
+<audio id="bgMusic">
   <source src="raabta.mp3" type="audio/mpeg">
 </audio>
 
@@ -69,11 +68,10 @@ button {
 function celebrate() {
   const music = document.getElementById("bgMusic");
 
-  // Safari-safe play
+  // Android-safe music play
   music.currentTime = 0;
-  music.play().then(() => {
-    music.loop = true;
-  });
+  music.play();
+  music.loop = true;
 
   document.getElementById("content").innerHTML = `
     <div class="heart">💖</div>
@@ -82,12 +80,13 @@ function celebrate() {
     <p>— Forever Yours, Uday ❤️</p>
   `;
 
+  // WhatsApp after 2 seconds
   setTimeout(() => {
     const msg = encodeURIComponent(
       "Akanksha ❤️ I’m so happy you said YES! 💖 You are my Valentine 🌹 — Uday"
     );
     window.open(
-      "https://wa.me/919652345247?text=" + msg,
+      "https://wa.me/919652345247?text=" + thank you my sweet heart❤️,
       "_blank"
     );
   }, 2000);
@@ -96,3 +95,4 @@ function celebrate() {
 
 </body>
 </html>
+
