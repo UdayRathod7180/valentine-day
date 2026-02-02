@@ -8,20 +8,25 @@
 body {
   margin: 0;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background:
     linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
     url("akanksha.jpg") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: Arial, sans-serif;
   color: white;
-  text-align: center;
+  text-align: left;
   overflow: hidden;
 }
 
+.container {
+  max-width: 500px;
+  padding-left: 40px;
+}
+
 .heart {
-  font-size: 80px;
+  font-size: 60px;
   animation: beat 1.2s infinite;
 }
 
@@ -34,26 +39,14 @@ body {
 }
 
 button {
-  padding: 15px 40px;
-  font-size: 22px;
+  padding: 14px 36px;
+  font-size: 20px;
   border: none;
   border-radius: 30px;
   background: #ff2d6f;
   color: white;
   cursor: pointer;
   margin-top: 20px;
-  font-weight: bold;
-}
-
-.rose, .confetti {
-  position: absolute;
-  font-size: 28px;
-  animation: fall linear infinite;
-}
-
-@keyframes fall {
-  0% { transform: translateY(-100px); opacity: 1; }
-  100% { transform: translateY(100vh); opacity: 0; }
 }
 </style>
 </head>
@@ -64,65 +57,39 @@ button {
   <source src="raabta.mp3" type="audio/mpeg">
 </audio>
 
-<div id="content">
-  <div class="heart">❤️</div>
-  <h1>Akanksha 💕</h1>
-  <h2>Will you be my Valentine?</h2>
-  <p>— From Uday ❤️</p>
+<div class="container" id="content">
+  <div class="heart">💖</div>
+  <h1>I LOVE YOU<br>AKANKSHA</h1>
+  <p>You are my Valentine 🌹</p>
+  <p>— Forever Yours, Uday ❤️</p>
   <button onclick="celebrate()">Yes 💖</button>
 </div>
 
 <script>
-setInterval(() => {
-  let rose = document.createElement("div");
-  rose.className = "rose";
-  rose.innerHTML = "🌹";
-  rose.style.left = Math.random() * 100 + "vw";
-  rose.style.animationDuration = (Math.random() * 3 + 3) + "s";
-  document.body.appendChild(rose);
-  setTimeout(() => rose.remove(), 5000);
-}, 400);
-  
-<script>
 function celebrate() {
   const music = document.getElementById("bgMusic");
 
-  // Play music (iPhone-safe)
+  // Safari-safe play
   music.currentTime = 0;
   music.play().then(() => {
     music.loop = true;
-  }).catch(err => {
-    alert("Tap again to play music 🎵");
   });
 
-  // Change content
   document.getElementById("content").innerHTML = `
-    <div style="font-size:80px; animation: beat 1.2s infinite;">💖</div>
+    <div class="heart">💖</div>
     <h1>🎉 I LOVE YOU AKANKSHA 🎉</h1>
-    <h2>You are my Valentine 🌹</h2>
-    <h3>— Forever Yours, Uday ❤️</h3>
+    <p>You are my Valentine 🌹</p>
+    <p>— Forever Yours, Uday ❤️</p>
   `;
 
-  // Confetti
-  for (let i = 0; i < 30; i++) {
-    let c = document.createElement("div");
-    c.style.position = "absolute";
-    c.style.left = Math.random() * 100 + "vw";
-    c.style.top = "-50px";
-    c.style.fontSize = "28px";
-    c.innerHTML = ["🎉","❤️","💖","🥰","✨"][Math.floor(Math.random()*5)];
-    c.style.animation = "fall 3s linear";
-    document.body.appendChild(c);
-    setTimeout(() => c.remove(), 3000);
-  }
-}
-</script>
-
   setTimeout(() => {
-    let msg = encodeURIComponent(
+    const msg = encodeURIComponent(
       "Akanksha ❤️ I’m so happy you said YES! 💖 You are my Valentine 🌹 — Uday"
     );
-    window.open("https://wa.me/919652345247?text=" +Akanksha ❤️ I’m so happy you said YES! 💖 You are my Valentine 🌹 — Uday, "_blank");
+    window.open(
+      "https://wa.me/919652345247?text=" + msg,
+      "_blank"
+    );
   }, 2000);
 }
 </script>
