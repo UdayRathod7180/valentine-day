@@ -20,7 +20,7 @@ body {
 
 .container {
   padding-left: 30px;
-  max-width: 400px;
+  max-width: 420px;
 }
 
 .heart {
@@ -51,8 +51,8 @@ button {
 
 <body>
 
-<!-- 🎵 Music -->
-<audio id="bgMusic">
+<!-- 🎵 AUDIO -->
+<audio id="bgMusic" preload="auto">
   <source src="raabta.mp3" type="audio/mpeg">
 </audio>
 
@@ -61,32 +61,37 @@ button {
   <h1>I LOVE YOU<br>AKANKSHA</h1>
   <p>You are my Valentine 🌹</p>
   <p>— Forever Yours, Uday ❤️</p>
-  <button onclick="celebrate()">Yes 💖</button>
+
+  <!-- IMPORTANT: button ONLY starts music -->
+  <button onclick="startLove()">Yes 💖</button>
 </div>
 
 <script>
-function celebrate() {
+function startLove() {
   const music = document.getElementById("bgMusic");
 
-  // Android-safe music play
+  // 1️⃣ START MUSIC FIRST (Android requires this)
   music.currentTime = 0;
   music.play();
   music.loop = true;
 
-  document.getElementById("content").innerHTML = `
-    <div class="heart">💖</div>
-    <h1>🎉 I LOVE YOU AKANKSHA 🎉</h1>
-    <p>You are my Valentine 🌹</p>
-    <p>— Forever Yours, Uday ❤️</p>
-  `;
+  // 2️⃣ AFTER a tiny delay, change the page
+  setTimeout(() => {
+    document.getElementById("content").innerHTML = `
+      <div class="heart">💖</div>
+      <h1>🎉 I LOVE YOU AKANKSHA 🎉</h1>
+      <p>You are my Valentine 🌹</p>
+      <p>— Forever Yours, Uday ❤️</p>
+    `;
+  }, 150);
 
-  // WhatsApp after 2 seconds
+  // 3️⃣ WhatsApp after 2 seconds
   setTimeout(() => {
     const msg = encodeURIComponent(
       "Akanksha ❤️ I’m so happy you said YES! 💖 You are my Valentine 🌹 — Uday"
     );
     window.open(
-      "https://wa.me/919652345247?text=" + thank you my sweet heart❤️,
+      "https://wa.me/919652345247?text=" + I LOVE YOU AKKI,
       "_blank"
     );
   }, 2000);
@@ -95,4 +100,3 @@ function celebrate() {
 
 </body>
 </html>
-
