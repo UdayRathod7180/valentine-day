@@ -12,15 +12,17 @@ body {
     linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
     url("akanksha.jpg") center/cover no-repeat;
   display: flex;
-  align-items: center;
   justify-content: flex-start;
+  align-items: center;
   font-family: Arial, sans-serif;
   color: white;
+  overflow: hidden;
 }
 
 .container {
   padding-left: 30px;
   max-width: 420px;
+  z-index: 2;
 }
 
 .heart {
@@ -37,7 +39,7 @@ body {
 }
 
 button {
-  padding: 14px 34px;
+  padding: 14px 36px;
   font-size: 20px;
   border: none;
   border-radius: 30px;
@@ -46,23 +48,34 @@ button {
   cursor: pointer;
   margin-top: 20px;
 }
+
+/* Falling emojis */
+.fall {
+  position: absolute;
+  top: -50px;
+  font-size: 28px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  from { transform: translateY(-50px); opacity: 1; }
+  to { transform: translateY(110vh); opacity: 0; }
+}
 </style>
 </head>
 
 <body>
 
-<!-- 🎵 AUDIO -->
+<!-- 🎵 Music -->
 <audio id="bgMusic" preload="auto">
   <source src="raabta.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container" id="content">
-  <div class="heart">💖</div>
-  <h1>I LOVE YOU<br>AKANKSHA</h1>
-  <p>You are my Valentine 🌹</p>
-  <p>— Forever Yours, Uday ❤️</p>
-
-  <!-- IMPORTANT: button ONLY starts music -->
+  <div class="heart">❤️</div>
+  <h1>Akanksha 💕</h1>
+  <h2>Will you be my Valentine?</h2>
+  <p>— From Uday ❤️</p>
   <button onclick="startLove()">Yes 💖</button>
 </div>
 
@@ -70,28 +83,41 @@ button {
 function startLove() {
   const music = document.getElementById("bgMusic");
 
-  // 1️⃣ START MUSIC FIRST (Android requires this)
+  // ✅ Start music FIRST (Android rule)
   music.currentTime = 0;
   music.play();
   music.loop = true;
 
-  // 2️⃣ AFTER a tiny delay, change the page
+  // ✅ Change text slightly AFTER music starts
   setTimeout(() => {
     document.getElementById("content").innerHTML = `
-      <div class="heart">💖</div>
+      <div class="heart">❤️</div>
       <h1>🎉 I LOVE YOU AKANKSHA 🎉</h1>
-      <p>You are my Valentine 🌹</p>
+      <h2>You are my Valentine 🌹</h2>
       <p>— Forever Yours, Uday ❤️</p>
     `;
   }, 150);
 
-  // 3️⃣ WhatsApp after 2 seconds
+  // 🌹❤️ Flowers & hearts rain
+  const emojis = ["🌹","❤️","💖","💘","🥰"];
+  const rainInterval = setInterval(() => {
+    const drop = document.createElement("div");
+    drop.className = "fall";
+    drop.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+    drop.style.left = Math.random() * 100 + "vw";
+    drop.style.animationDuration = (Math.random() * 2 + 3) + "s";
+    document.body.appendChild(drop);
+
+    setTimeout(() => drop.remove(), 5000);
+  }, 250);
+
+  // 📲 WhatsApp after 2 seconds
   setTimeout(() => {
     const msg = encodeURIComponent(
       "Akanksha ❤️ I’m so happy you said YES! 💖 You are my Valentine 🌹 — Uday"
     );
     window.open(
-      "https://wa.me/919652345247?text=" + I LOVE YOU AKKI,
+      "https://wa.me/919652345247?text=" + Thanks For accepting My love Akanksha,
       "_blank"
     );
   }, 2000);
