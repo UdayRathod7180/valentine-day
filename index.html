@@ -8,119 +8,81 @@
 body {
   margin: 0;
   height: 100vh;
-  background:
-    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-    url("akanksha.jpg") center/cover no-repeat;
+  background: linear-gradient(135deg, #ff4e8a, #ff9a9e);
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   font-family: Arial, sans-serif;
+  text-align: center;
   color: white;
   overflow: hidden;
 }
 
-.container {
-  padding-left: 30px;
-  max-width: 420px;
-  z-index: 2;
-}
-
-.heart {
-  font-size: 70px;
-  animation: beat 1.2s infinite;
-}
-
-@keyframes beat {
-  0% { transform: scale(1); }
-  25% { transform: scale(1.2); }
-  50% { transform: scale(1); }
-  75% { transform: scale(1.2); }
-  100% { transform: scale(1); }
-}
-
 button {
-  padding: 14px 36px;
-  font-size: 20px;
+  padding: 15px 40px;
+  font-size: 22px;
   border: none;
   border-radius: 30px;
-  background: #ff2d6f;
-  color: white;
+  background: white;
+  color: #ff2d6f;
   cursor: pointer;
-  margin-top: 20px;
+  font-weight: bold;
 }
 
-/* Falling emojis */
-.fall {
+.emoji {
   position: absolute;
-  top: -50px;
+  top: -40px;
   font-size: 28px;
-  animation: fall linear forwards;
+  animation: fall 3s linear forwards;
 }
 
 @keyframes fall {
-  from { transform: translateY(-50px); opacity: 1; }
-  to { transform: translateY(110vh); opacity: 0; }
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎵 Music -->
-<audio id="bgMusic" preload="auto">
-  <source src="raabta.mp3" type="audio/mpeg">
-</audio>
-
-<div class="container" id="content">
-  <div class="heart">❤️</div>
+<div id="content">
   <h1>Akanksha 💕</h1>
   <h2>Will you be my Valentine?</h2>
-  <p>— From Uday ❤️</p>
-  <button onclick="startLove()">Yes 💖</button>
+  <button onclick="celebrate()">Yes ❤️</button>
 </div>
 
 <script>
-function startLove() {
-  const music = document.getElementById("bgMusic");
+function celebrate() {
 
-  // ✅ Start music FIRST (Android rule)
-  music.currentTime = 0;
-  music.play();
-  music.loop = true;
+  // Change text
+  document.getElementById("content").innerHTML = `
+    <h1>🎉 I LOVE YOU AKANKSHA 🎉</h1>
+    <h2>❤️💖🥰</h2>
+  `;
 
-  // ✅ Change text slightly AFTER music starts
+  // Celebration emojis
+  const emojis = ["🎉","❤️","💖","🥰","✨"];
+  for (let i = 0; i < 30; i++) {
+    const e = document.createElement("div");
+    e.className = "emoji";
+    e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+    e.style.left = Math.random() * 100 + "vw";
+    e.style.animationDuration = (Math.random() * 2 + 2) + "s";
+    document.body.appendChild(e);
+    setTimeout(() => e.remove(), 4000);
+  }
+
+  // WhatsApp (must be direct user action → works on Android)
   setTimeout(() => {
-    document.getElementById("content").innerHTML = `
-      <div class="heart">❤️</div>
-      <h1>🎉 I LOVE YOU AKANKSHA 🎉</h1>
-      <h2>You are my Valentine 🌹</h2>
-      <p>— Forever Yours, Uday ❤️</p>
-    `;
-  }, 150);
-
-  // 🌹❤️ Flowers & hearts rain
-  const emojis = ["🌹","❤️","💖","💘","🥰"];
-  const rainInterval = setInterval(() => {
-    const drop = document.createElement("div");
-    drop.className = "fall";
-    drop.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-    drop.style.left = Math.random() * 100 + "vw";
-    drop.style.animationDuration = (Math.random() * 2 + 3) + "s";
-    document.body.appendChild(drop);
-
-    setTimeout(() => drop.remove(), 5000);
-  }, 250);
-
-  // 📲 WhatsApp after 2 seconds
-  setTimeout(() => {
-    const msg = encodeURIComponent(
-      "Akanksha ❤️ I’m so happy you said YES! 💖 You are my Valentine 🌹 — Uday"
+    const message = encodeURIComponent(
+      "Akanksha ❤️ I clicked YES! I love you so much 💖"
     );
-    window.open(
-      "https://wa.me/919652345247?text=" + Thanks For accepting My love Akanksha,
-      "_blank"
-    );
-  }, 2000);
+    window.location.href =
+      "https://wa.me/919652345247?text=" Akanksha 🌹 I said YES because you mean everything to me ❤️
++ message;
+  }, 1200);
 }
 </script>
 
